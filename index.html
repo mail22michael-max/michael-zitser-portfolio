@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Michael Zitser, amateur painter. Mixed-media works with descriptions and dates.">
+<style>body { margin: 0; } img { max-width: 100%; } [hidden] { display: none !important; }</style>
+<title>Michael Zitser</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Karla:wght@400;500;600&display=swap">
+<style>
+/* Layout: a quiet gallery wall. Each work hangs in a frame with its wall label beside it, alternating sides down the page. */
+:root {
+  --wall: #f4f4f1;
+  --wall-2: #e9e9e4;
+  --ink: #1e2225;
+  --muted: #5b6266;
+  --rule: #d4d5ce;
+  --accent: #2c5a62;
+  --frame: #2b2723;
+  --mat: #fbfbf8;
+  --shadow: rgba(20, 22, 24, 0.38);
+  --display: "Cormorant", "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --body: "Karla", "Segoe UI", Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --wall: #1a1c1e; --wall-2: #222527; --ink: #ebeae6; --muted: #a2a7a9; --rule: #363a3d;
+    --accent: #8dbac1; --frame: #0d0c0b; --mat: #2a2d2f; --shadow: rgba(0, 0, 0, 0.7);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --wall: #1a1c1e; --wall-2: #222527; --ink: #ebeae6; --muted: #a2a7a9; --rule: #363a3d;
+  --accent: #8dbac1; --frame: #0d0c0b; --mat: #2a2d2f; --shadow: rgba(0, 0, 0, 0.7);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--wall);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Header */
+.top { padding-block: clamp(40px, 8vw, 96px) clamp(28px, 5vw, 56px); border-bottom: 1px solid var(--rule); }
+.top .wrap { display: grid; gap: 18px; }
+.top nav { display: flex; gap: 22px; flex-wrap: wrap; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; }
+.top nav a { color: var(--muted); text-decoration: none; }
+.top nav a:hover { color: var(--ink); }
+h1 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(56px, 10vw, 120px);
+  line-height: 0.95;
+  margin: 0;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.lede { margin: 0; max-width: 34em; font-size: clamp(17px, 2vw, 20px); color: var(--muted); }
+.facts { margin: 0; color: var(--muted); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+
+/* Toolbar */
+.bar { padding-block: 36px 8px; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 16px; }
+h2 { font-family: var(--display); font-weight: 500; font-size: 40px; line-height: 1.1; margin: 0; }
+.years { display: flex; flex-wrap: wrap; gap: 8px; }
+.years button {
+  font: inherit; font-size: 15px; font-variant-numeric: tabular-nums;
+  padding: 5px 14px; border-radius: 999px;
+  border: 1px solid var(--rule); background: transparent; color: var(--muted); cursor: pointer;
+}
+.years button:hover { color: var(--ink); border-color: var(--muted); }
+.years button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--wall); }
+
+/* Gallery */
+.works { display: grid; gap: clamp(64px, 10vw, 128px); padding-block: 40px clamp(64px, 10vw, 120px); }
+.work {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: center;
+}
+.work:nth-child(even) .frame { order: 2; }
+.frame {
+  justify-self: center;
+  max-width: 100%;
+  padding: clamp(10px, 1.8vw, 22px);
+  background: var(--mat);
+  border: clamp(5px, 0.8vw, 9px) solid var(--frame);
+  box-shadow: 0 22px 40px -22px var(--shadow), 0 2px 4px -2px var(--shadow);
+  cursor: zoom-in;
+  font: inherit;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.frame:hover { transform: translateY(-3px); box-shadow: 0 30px 50px -24px var(--shadow), 0 2px 4px -2px var(--shadow); }
+.frame img { display: block; width: auto; height: auto; max-width: 100%; max-height: min(74vh, 720px); }
+
+.label { display: grid; gap: 10px; min-width: 0; max-width: 28em; border-top: 1px solid var(--rule); padding-top: 18px; }
+.label time { font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 600; font-variant-numeric: tabular-nums; }
+.label h3 { font-family: var(--display); font-weight: 600; font-size: clamp(30px, 3.4vw, 40px); line-height: 1.05; margin: 0; text-wrap: balance; }
+.label .meta { margin: 0; font-size: 15px; color: var(--muted); font-style: italic; }
+.label .desc { margin: 4px 0 0; }
+
+/* About */
+.about { background: var(--wall-2); border-top: 1px solid var(--rule); }
+.about .wrap { padding-block: clamp(48px, 8vw, 88px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 32px; }
+.about p { margin: 0 0 1em; max-width: 34em; }
+footer .wrap { padding-block: 28px; font-size: 14px; color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+/* Lightbox */
+dialog {
+  border: 0; padding: 0; background: transparent; color: #f2f1ed;
+  max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; margin: 0;
+}
+dialog::backdrop { background: rgba(12, 12, 12, 0.94); }
+dialog[open] { display: grid; place-items: center; }
+.lb { display: grid; gap: 12px; justify-items: center; padding: max(56px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.lb img { max-width: 100%; max-height: 80vh; width: auto; height: auto; display: block; }
+.lb p { margin: 0; font-size: 15px; text-align: center; }
+.lb strong { font-family: var(--display); font-weight: 600; font-size: 26px; }
+.lb-btn {
+  font: inherit; font-size: 15px; padding: 6px 14px; border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35); background: rgba(0, 0, 0, 0.3); color: #f2f1ed; cursor: pointer;
+}
+.lb-btn:hover { border-color: rgba(255, 255, 255, 0.7); }
+.lb-close { position: fixed; top: calc(14px + env(safe-area-inset-top, 0px)); right: calc(14px + env(safe-area-inset-right, 0px)); }
+.lb-nav { display: flex; gap: 10px; }
+
+@media (max-width: 760px) {
+  .work { grid-template-columns: minmax(0, 1fr); }
+  .work:nth-child(even) .frame { order: 0; }
+  .label { max-width: none; }
+  .about .wrap { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .frame, .frame:hover { transition: none; transform: none; }
+}
+</style>
+</head>
+<body>
+<div lang="en">
+  <header class="top">
+    <div class="wrap">
+      <nav aria-label="Main">
+        <a href="#works">Works</a>
+        <a href="#about">About</a>
+      </nav>
+      <h1>Michael Zitser</h1>
+      <p class="lede">Amateur painter working in mixed media. Acrylic on canvas, built up with sand, stones, branches, gold leaf and the occasional found object.</p>
+      <p class="facts" id="facts"></p>
+    </div>
+  </header>
+
+  <main id="works">
+    <div class="wrap">
+      <div class="bar">
+        <h2>Works</h2>
+        <div class="years" id="years" role="group" aria-label="Filter by year"></div>
+      </div>
+      <div class="works" id="list"></div>
+    </div>
+  </main>
+
+  <section class="about" id="about">
+    <div class="wrap">
+      <h2>About</h2>
+      <div>
+        <p>Michael paints in his spare time. Most of his works begin as acrylic on canvas and then leave the flat surface: real branches, river stones, sand, a broken bottle or crumpled gold leaf become part of the picture.</p>
+        <p>His subjects move between nature, space and art history, from roots and canyons to the moon, an astronaut on a cliff edge and a nod to Mondrian. Each work on this site is shown with the date it was made and a few words about it.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span>© Michael Zitser</span>
+      <span>All artwork © the artist</span>
+    </div>
+  </footer>
+
+  <dialog id="lightbox" aria-label="Enlarged artwork">
+    <button class="lb-btn lb-close" id="lb-close" type="button">Close</button>
+    <div class="lb">
+      <img id="lb-img" alt="">
+      <p><strong id="lb-title"></strong></p>
+      <p id="lb-meta"></p>
+      <div class="lb-nav">
+        <button class="lb-btn" id="lb-prev" type="button">← Previous</button>
+        <button class="lb-btn" id="lb-next" type="button">Next →</button>
+      </div>
+    </div>
+  </dialog>
+</div>
+
+<script>
+/* ---------- The works ----------
+   To add a work: put the photo in images/ and add an entry here.
+   date is "YYYY-MM" (shown as month and year) or "YYYY-MM-DD". size is optional. */
+const paintings = [
+  { title: "Roots", date: "2026-07", medium: "Acrylic, sand and branch on canvas",
+    description: "A dark sky over a band of sandy earth. A real dry branch is fixed to the canvas as a root system, and above the ground line a single small white sprout breaks through.",
+    image: "images/painting-5546.jpg" },
+  { title: "Aperol", date: "2026-07", medium: "Acrylic, glass and stones on canvas",
+    description: "A real Aperol bottle, broken and painted, fixed to a black canvas. A stream of black stones pours out of it in place of the drink.",
+    image: "images/painting-5549.jpg" },
+  { title: "Homage to Mondrian", date: "2026-07", medium: "Acrylic and relief on canvas",
+    description: "A raised grid of black bars with fields of red, blue and yellow, after Piet Mondrian. On the left edge, a small dark silhouette stands at the border of the grid.",
+    image: "images/painting-5550.jpg" },
+  { title: "Déjà Vu", date: "2026-07", medium: "Acrylic on canvas",
+    description: "A green cat walks across a black canvas and dissolves into dripping lines of code. The title recalls the glitch in The Matrix, where the same black cat passes twice.",
+    image: "images/painting-5551.jpg" },
+  { title: "Moon", date: "2026-07", medium: "Acrylic relief on canvas",
+    description: "The full moon in greys and whites. The craters are built up in thick paint, with splashes radiating out from the impact points.",
+    image: "images/painting-5553.jpg" },
+  { title: "Astronaut", date: "2026-07", medium: "Acrylic relief on canvas",
+    description: "An astronaut stands at the edge of a cliff under a swirling blue sky that borrows from Van Gogh's Starry Night. The path is laid in thick copper paint over a dark rock face.",
+    image: "images/painting-5554.jpg" },
+  { title: "Golden Branch, Triptych", date: "2026-07", medium: "Gold leaf on black, three deep frames",
+    description: "Three shadow-box frames hung one above the other. Each holds a branch wrapped in crumpled gold leaf, and together they read as one branch running through all three.",
+    image: "images/painting-5556.jpg" },
+  { title: "Profile", date: "2026-07", medium: "Acrylic and pebbles on canvas",
+    description: "A figure in profile with closed eyes, the face divided into bright planes of colour. A line of white pebbles traces the head, and black pebbles form the collar.",
+    image: "images/painting-5558.jpg" },
+  { title: "Deep Breathing", date: "2026-03", medium: "Acrylic and relief on canvas",
+    description: "An underwater cave seen from above, its rough rock walls closing in around deep blue water. A lone diver descends into the depths, the blue darkening the further down he goes.",
+    image: "images/painting-5561.jpg" },
+];
+
+/* ---------- Rendering ---------- */
+const fmtMonth = new Intl.DateTimeFormat("en-GB", { month: "long", year: "numeric" });
+const fmtDay = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric" });
+const dateText = s => s.length > 7 ? fmtDay.format(new Date(s + "T12:00:00")) : fmtMonth.format(new Date(s + "-15T12:00:00"));
+paintings.forEach((p, i) => { p.order = i; });
+paintings.sort((a, b) => b.date.localeCompare(a.date) || a.order - b.order);
+
+const years = [...new Set(paintings.map(p => p.date.slice(0, 4)))].sort().reverse();
+document.getElementById("facts").textContent = paintings.length + " works · " +
+  (years.length > 1 ? years[years.length - 1] + "–" + years[0] : years[0]);
+
+let activeYear = "all";
+const yearsEl = document.getElementById("years");
+function renderYears() {
+  yearsEl.innerHTML = "";
+  if (years.length < 2) return;
+  [["all", "All"], ...years.map(y => [y, y])].forEach(([val, text]) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.id = "year-" + val; b.textContent = text;
+    b.setAttribute("aria-pressed", String(val === activeYear));
+    b.addEventListener("click", () => { activeYear = val; renderYears(); renderList(); });
+    yearsEl.appendChild(b);
+  });
+}
+
+const list = document.getElementById("list");
+let shown = [];
+function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+const metaOf = p => p.medium + (p.size ? " · " + p.size : "");
+function renderList() {
+  list.innerHTML = "";
+  shown = paintings.filter(p => activeYear === "all" || p.date.startsWith(activeYear));
+  shown.forEach((p, i) => {
+    const art = el("article", "work");
+    const frame = el("button", "frame"); frame.type = "button";
+    frame.setAttribute("aria-label", "Enlarge " + p.title);
+    const img = el("img"); img.src = p.image; img.alt = p.title + ", " + p.medium; img.loading = i < 2 ? "eager" : "lazy";
+    frame.appendChild(img); frame.addEventListener("click", () => openLightbox(i));
+    const label = el("div", "label");
+    const time = el("time", null, dateText(p.date)); time.dateTime = p.date;
+    label.append(time, el("h3", null, p.title), el("p", "meta", metaOf(p)), el("p", "desc", p.description));
+    art.append(frame, label);
+    list.appendChild(art);
+  });
+}
+
+const dlg = document.getElementById("lightbox");
+let current = 0;
+function showInLightbox(i) {
+  current = (i + shown.length) % shown.length;
+  const p = shown[current];
+  const img = document.getElementById("lb-img");
+  img.src = p.image; img.alt = p.title;
+  document.getElementById("lb-title").textContent = p.title;
+  document.getElementById("lb-meta").textContent = dateText(p.date) + " · " + metaOf(p);
+}
+function openLightbox(i) {
+  showInLightbox(i);
+  if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+}
+function closeLightbox() { if (dlg.close) dlg.close(); else dlg.removeAttribute("open"); }
+document.getElementById("lb-close").addEventListener("click", closeLightbox);
+document.getElementById("lb-prev").addEventListener("click", () => showInLightbox(current - 1));
+document.getElementById("lb-next").addEventListener("click", () => showInLightbox(current + 1));
+dlg.addEventListener("click", e => { if (e.target === dlg) closeLightbox(); });
+dlg.addEventListener("keydown", e => {
+  if (e.key === "ArrowLeft") showInLightbox(current - 1);
+  if (e.key === "ArrowRight") showInLightbox(current + 1);
+});
+
+renderYears();
+renderList();
+</script>
+</body>
+</html>
